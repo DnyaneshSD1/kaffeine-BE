@@ -1,21 +1,27 @@
 package com.cafe.kaffeine.controller;
 
-import com.cafe.kaffeine.service.Base;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
 public class BaseController {
 
-    @Autowired
-    Base base;
+    protected <T> ResponseEntity<T> created(T t) {
+        return new ResponseEntity<T>(t, HttpStatus.CREATED);
+    }
 
-    @PostMapping("/demo")
-    public ResponseEntity<String> demo() {
-        base.addRecords();
-        return new ResponseEntity<>(HttpStatus.OK);
+    protected <T> ResponseEntity<T> get(T t) {
+        return new ResponseEntity<T>(t, HttpStatus.OK);
+    }
+
+    protected <T> ResponseEntity<T> updated(T t) {
+        return new ResponseEntity<T>(t, HttpStatus.OK);
+    }
+
+    protected <T> ResponseEntity<?> getNoContentResponse(T t) {
+        return new ResponseEntity<>(t, HttpStatus.NO_CONTENT);
+    }
+
+    protected <T> ResponseEntity<?> getOKResponse(T t) {
+        return new ResponseEntity<T>(t, HttpStatus.OK);
     }
 }
